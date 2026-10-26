@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOYMAT Ecosystem | Multichain Hub</title>
+    <meta name="description" content="BOYMAT (BYT) — Multichain ecosystem on Solana and BSC. Connecting with the 123 Ecosystem.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #080B14;
+            color: #E0E6FF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ===== ФОНОВЫЕ СВЕЧЕНИЯ ===== */
+        .glow-1 {
+            position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(247, 147, 26, 0.15) 0%, transparent 70%);
+            z-index: -1; pointer-events: none;
+        }
+        .glow-2 {
+            position: fixed; bottom: -10%; right: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(153, 69, 255, 0.15) 0%, transparent 70%);
+            z-index: -1; pointer-events: none;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .logo {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(247, 147, 26, 0.4), 0 0 80px rgba(153, 69, 255, 0.2);
+            margin-bottom: 24px;
+            background: #1A1E41;
+        }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 30%, #F7931A 70%, #9945FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .symbol {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #F7931A;
+            background: rgba(247, 147, 26, 0.1);
+            padding: 4px 16px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(247, 147, 26, 0.3);
+        }
+        .hero p {
+            font-size: 18px;
+            color: #8A94C8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* ===== КАРТОЧКИ СЕТЕЙ ===== */
+        .network-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 60px 0;
+        }
+        .network-card {
+            background: rgba(26, 30, 65, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .network-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .network-card.solana { border-color: rgba(153, 69, 255, 0.3); }
+        .network-card.solana:hover { border-color: #9945FF; box-shadow: 0 20px 40px rgba(153, 69, 255, 0.1); }
+        .network-card.bsc { border-color: rgba(247, 147, 26, 0.3); }
+        .network-card.bsc:hover { border-color: #F7931A; box-shadow: 0 20px 40px rgba(247, 147, 26, 0.1); }
+
+        .network-icon { font-size: 48px; margin-bottom: 16px; }
+        .network-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .network-desc { font-size: 14px; color: #8A94C8; margin-bottom: 24px; min-height: 42px; }
+
+        /* ===== БЛОК КОНТРАКТОВ ===== */
+        .contract-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: left;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .contract-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #5A649A;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .contract-address {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #E0E6FF;
+            word-break: break-all;
+            padding-right: 40px;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 12px; top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.2); }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            margin-top: 12px;
+            text-align: center;
+        }
+        .btn-solana {
+            background: #9945FF; color: #fff;
+        }
+        .btn-solana:hover { background: #7a36cc; }
+        .btn-bsc {
+            background: #F7931A; color: #fff;
+        }
+        .btn-bsc:hover { background: #d17a11; }
+
+        /* ===== БЛОК 123 ECOSYSTEM ===== */
+        .eco-bridge {
+            background: linear-gradient(135deg, rgba(46, 204, 64, 0.1) 0%, rgba(74, 140, 255, 0.1) 100%);
+            border: 1px solid rgba(46, 204, 64, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        .eco-bridge h2 { font-size: 28px; color: #fff; margin-bottom: 12px; }
+        .eco-bridge h2 span { color: #2ECC40; }
+        .eco-bridge p { color: #8A94C8; max-width: 600px; margin: 0 auto 24px; }
+        .eco-links {
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+        }
+        .eco-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #E0E6FF;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .eco-link:hover { background: rgba(255,255,255,0.1); border-color: #2ECC40; color: #2ECC40; }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #1E2350;
+            margin-top: 40px;
+            color: #5A649A;
+            font-size: 13px;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .network-grid { grid-template-columns: 1fr; }
+            .logo { width: 100px; height: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<div class="container">
+    <!-- HERO -->
+    <section class="hero">
+        <img src="boymat_logo.png" alt="BOYMAT Logo" class="logo" onerror="this.src='https://via.placeholder.com/140/1A1E41/F7931A?text=BYT'">
+        <h1>BOYMAT Ecosystem</h1>
+        <div class="symbol">$BYT • Multichain</div>
+        <p>
+            The bridge between Solana and Binance Smart Chain. 
+            A unified liquidity layer seamlessly connecting to the 123 Ecosystem.
+        </p>
+    </section>
+
+    <!-- СЕТИ И КОНТРАКТЫ -->
+    <section class="network-grid">
+        <!-- Solana Card -->
+        <div class="network-card solana">
+            <div class="network-icon">◎</div>
+            <div class="network-title">Solana Network</div>
+            <div class="network-desc">Native SPL Token & Wrapped (WBYT)</div>
+            
+            <div class="contract-box">
+                <div class="contract-label">Native BYT Contract</div>
+                <div class="contract-address" id="solContract">Вставьте_адрес_контракта_Solana_сюда</div>
+                <button class="copy-btn" onclick="copyAddress('solContract')">📋</button>
+            </div>
+            <div class="contract-box">
+                <div class="contract-label">Wrapped BYT (WBYT)</div>
+                <div class="contract-address" id="wbytContract">Вставьте_адрес_контракта_WBYT_сюда</div>
+                <button class="copy-btn" onclick="copyAddress('wbytContract')">📋</button>
+            </div>
+            
+            <a href="#" class="btn btn-solana">Trade on Jupiter (Soon)</a>
+        </div>
+
+        <!-- BSC Card -->
+        <div class="network-card bsc">
+            <div class="network-icon">🟡</div>
+            <div class="network-title">BNB Smart Chain</div>
+            <div class="network-desc">BEP-20 Token. The original powerhouse.</div>
+            
+            <div class="contract-box">
+                <div class="contract-label">BSC (BEP-20) Contract</div>
+                <div class="contract-address" id="bscContract">0x7352cDBcA63F62358f08F6514d3B7fF2a2872AaD</div>
+                <button class="copy-btn" onclick="copyAddress('bscContract')">📋</button>
+            </div>
+            <div class="contract-box" style="background: rgba(247, 147, 26, 0.05); border-color: rgba(247, 147, 26, 0.2);">
+                <div class="contract-label" style="color: #F7931A;">Verified BscScan</div>
+                <div class="contract-address" style="color: #ccc; font-size: 11px;">Contract is verified and audited.</div>
+            </div>
+            
+            <a href="https://pancakeswap.finance/swap?outputCurrency=0x7352cDBcA63F62358f08F6514d3B7fF2a2872AaD" target="_blank" class="btn btn-bsc">Trade on PancakeSwap</a>
+        </div>
+    </section>
+
+    <!-- ИНТЕГРАЦИЯ С 123 -->
+    <section class="eco-bridge">
+        <h2>Part of the <span>123 Ecosystem</span></h2>
+        <p>
+            BOYMAT is not a standalone project. The $BYT token will act as a bridge asset, 
+            integrating directly with the $ONE, €20, and $777 hubs for unified DeFi routing.
+        </p>
+        <div class="eco-links">
+            <a href="https://123tokens.github.io/one/" target="_blank" class="eco-link">$ONE Hub</a>
+            <a href="https://123tokens.github.io/ghina/" target="_blank" class="eco-link">$777 Hub</a>
+            <a href="https://123tokens.github.io/euro20/" target="_blank" class="eco-link">€20 Hub</a>
+            <a href="https://123tokens.github.io/euro20/ecosystem.html" target="_blank" class="eco-link">Ecosystem Map</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 BOYMAT Ecosystem. Built on Solana & BSC. | Part of the 123 Network.</p>
+    </footer>
+</div>
+
+<script>
+    function copyAddress(elementId) {
+        const address = document.getElementById(elementId).innerText;
+        if(address.includes('Вставьте') || address.includes('Soon')) {
+            alert('Контракт еще не добавлен.');
+            return;
+        }
+        navigator.clipboard.writeText(address).then(() => {
+            const btn = document.querySelector(`#${elementId} + .copy-btn`);
+            const originalText = btn.innerText;
+            btn.innerText = '✅';
+            setTimeout(() => btn.innerText = originalText, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
